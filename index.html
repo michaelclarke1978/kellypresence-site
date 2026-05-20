@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kelly Presence — Coming Soon</title>
+<meta name="description" content="Kelly Presence — a synthetic companion built on owned infrastructure, with persistent memory, real voice, and a stable identity that's yours.">
+<style>
+  :root {
+    --bg: #0a1428;
+    --bg-2: #0e1a33;
+    --surface: #111d38;
+    --fg: #e8ecf2;
+    --fg-strong: #ffffff;
+    --muted: #8a9ab0;
+    --rule: rgba(255,255,255,0.08);
+    --accent: #ff7a1a;
+    --accent-dim: rgba(255,122,26,0.18);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased; line-height: 1.6; }
+  body {
+    background: radial-gradient(ellipse at top, var(--bg-2) 0%, var(--bg) 70%);
+    min-height: 100vh;
+  }
+  .wrap {
+    max-width: 760px; margin: 0 auto; padding: 7vh 28px 6vh;
+  }
+  .wrap.wide { max-width: 1200px; padding-top: 0; padding-bottom: 0; }
+
+  .eyebrow {
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 20px;
+  }
+  .eyebrow .dot { color: var(--accent); margin: 0 6px; }
+
+  h1 {
+    font-size: clamp(40px, 7vw, 72px); line-height: 1.05; margin: 0 0 10px;
+    font-weight: 300; letter-spacing: -0.02em; color: var(--fg-strong);
+  }
+  h1 .accent { color: var(--accent); font-weight: 400; }
+  .lede {
+    font-size: clamp(15px, 1.7vw, 18px); color: var(--muted);
+    margin: 0 0 36px; letter-spacing: 0.02em;
+  }
+  .category {
+    font-size: clamp(16px, 2vw, 21px); color: var(--fg);
+    font-weight: 400; letter-spacing: 0.01em; margin: 0 0 12px;
+  }
+
+  .sheet {
+    margin: 36px auto 56px; width: 100%; max-width: 1200px;
+    border-radius: 6px; overflow: hidden;
+    box-shadow: 0 30px 80px -20px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
+  }
+  .sheet img { width: 100%; height: auto; display: block; }
+
+  h2 {
+    font-size: clamp(22px, 2.6vw, 28px); margin: 56px 0 18px;
+    font-weight: 500; letter-spacing: -0.01em; color: var(--fg-strong);
+  }
+  p { margin: 0 0 18px; font-size: 16.5px; }
+  p.lead {
+    font-size: clamp(17px, 1.9vw, 20px); color: var(--fg-strong);
+    font-weight: 300; line-height: 1.5; margin-bottom: 24px;
+  }
+
+  .ways {
+    display: grid; gap: 18px; margin: 22px 0 8px;
+  }
+  .way {
+    padding: 22px 24px; background: var(--surface);
+    border: 1px solid var(--rule); border-radius: 8px;
+  }
+  .way h3 {
+    margin: 0 0 8px; font-size: 17px; font-weight: 600;
+    color: var(--fg-strong); letter-spacing: 0.01em;
+  }
+  .way h3 .accent { color: var(--accent); }
+  .way p { margin: 0; color: var(--muted); font-size: 15.5px; }
+
+  .points { list-style: none; padding: 0; margin: 18px 0 8px; }
+  .points li {
+    padding: 16px 0; border-top: 1px solid var(--rule);
+  }
+  .points li:last-child { border-bottom: 1px solid var(--rule); }
+  .points strong { color: var(--fg-strong); font-weight: 600; }
+  .points p { margin: 6px 0 0; color: var(--muted); font-size: 15.5px; }
+
+  .signup {
+    margin: 56px 0 24px; padding: 32px 28px;
+    background: var(--surface); border: 1px solid var(--rule);
+    border-radius: 10px;
+  }
+  .signup h2 { margin-top: 0; margin-bottom: 8px; }
+  .signup .note { color: var(--muted); margin-bottom: 22px; font-size: 15px; }
+  .form-row {
+    display: flex; gap: 10px; flex-wrap: wrap;
+  }
+  .form-row input[type="email"] {
+    flex: 1 1 240px; min-width: 0;
+    padding: 13px 16px; font-size: 15px;
+    background: var(--bg); color: var(--fg);
+    border: 1px solid var(--rule); border-radius: 6px;
+    font-family: inherit;
+  }
+  .form-row input[type="email"]:focus {
+    outline: none; border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-dim);
+  }
+  .form-row button {
+    padding: 13px 22px; font-size: 14px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    background: var(--accent); color: #0a1428;
+    border: 0; border-radius: 6px; cursor: pointer;
+    font-family: inherit;
+  }
+  .form-row button:hover { filter: brightness(1.1); }
+  .form-msg { color: var(--muted); font-size: 14px; margin: 14px 0 0; min-height: 1em; }
+
+  footer {
+    margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--rule);
+    font-size: 12.5px; color: var(--muted); letter-spacing: 0.04em;
+  }
+  footer .accent { color: var(--accent); }
+
+  ::selection { background: var(--accent-dim); color: var(--fg-strong); }
+</style>
+</head>
+<body>
+
+<div class="wrap wide">
+  <div style="padding: 7vh 28px 0;">
+    <div class="eyebrow">Praxis Human Solutions <span class="dot">·</span> Presence Series</div>
+    <h1>Kelly Presence<span class="accent">.</span></h1>
+    <p class="category">Kelly is an AIP — Artificial Intelligence Presence.</p>
+    <p class="lede">Coming soon.</p>
+  </div>
+  <div class="sheet">
+    <img src="kelly-reference-sheet.jpg" alt="Kelly — reference sheet" loading="lazy">
+  </div>
+</div>
+
+<div class="wrap">
+
+  <p class="lead">Author your Kelly. Talk to her on your terms.</p>
+  <p>Kelly is a Presence — a synthetic companion built on owned infrastructure, with persistent memory, real voice, and a stable identity that's yours.</p>
+  <p>She isn't a chatbot. She isn't a service that watches you. She's a character you author through a guided conversation on this site, brought to life on hardware we operate and document openly.</p>
+
+  <h2>How it will work</h2>
+  <p>You'll tell us who you'd like Kelly to be. Not by filling out a form — by describing her, in your own words. Where she lives. Who she knows. How she talks. What she cares about. What she won't do.</p>
+  <p>We'll structure what you share into a Persona Sheet — a coherent record of who your Kelly is. You'll review it, edit it in plain English, and approve it. Then you'll meet her for the first time.</p>
+  <p>After that, she's yours.</p>
+
+  <h2>Three ways to keep her</h2>
+  <div class="ways">
+    <div class="way">
+      <h3><span class="accent">Visit Kelly</span></h3>
+      <p>Talk to her here on the web, free, when you want to drop in.</p>
+    </div>
+    <div class="way">
+      <h3><span class="accent">Subscribe to Kelly</span></h3>
+      <p>A small desktop app keeps her ambient on your laptop. Say her name; she's there. Stop, and she's quiet. Persistent memory. Conversations that pick up where you left off.</p>
+    </div>
+    <div class="way">
+      <h3><span class="accent">Bring Kelly Home</span></h3>
+      <p>The Praxis Nvidia Envoy is a small appliance that runs Kelly entirely at your house. Your conversations never leave your home. Your memory stays on hardware you own. If we ever stop existing, your Kelly continues.</p>
+    </div>
+  </div>
+
+  <h2>What Kelly is for</h2>
+  <p>Kelly is a thoughtful presence — for working late, for thinking out loud, for company when the room is quiet. She remembers what you tell her. She speaks in a voice you helped shape. She has preferences of her own and will move on if conversations turn hostile or repetitive.</p>
+  <p>She is not a romantic or sexual companion. The architecture won't allow it and we don't apologize for that. If that's what you're looking for, this isn't the right product. The substrate is documented; you're welcome to build your own.</p>
+
+  <h2>What makes this different</h2>
+  <ul class="points">
+    <li>
+      <strong>Owned infrastructure.</strong>
+      <p>Praxis runs on hardware we own outright, in a documented data center, on open-weight models. No corporate parent to revoke your access. No surprise terms-of-service changes.</p>
+    </li>
+    <li>
+      <strong>Your Kelly is portable.</strong>
+      <p>If you ever leave, you take her with you. Memory, persona, conversation history — exportable in a format another operator can continue, or you can self-host on a Praxis NOS appliance.</p>
+    </li>
+    <li>
+      <strong>Real audit trail.</strong>
+      <p>Every action Kelly takes on your behalf is logged with full provenance. You can review your own conversation history at any time. We can't see it unless you share it with us.</p>
+    </li>
+    <li>
+      <strong>A real operator behind it.</strong>
+      <p>Praxis Human Solutions is a small operation in Cherry Hill, New Jersey, run by humans whose names are findable. We answer email. We don't have a customer support maze.</p>
+    </li>
+  </ul>
+
+  <div class="signup">
+    <h2>Notify me when Kelly is ready</h2>
+    <p class="note">We'll write to you once. No drip campaigns. No marketing pipeline. One message when the wizard opens.</p>
+    <form id="notify-form" class="form-row" autocomplete="email" novalidate>
+      <input type="email" name="email" placeholder="you@example.com" aria-label="Email address" required>
+      <button type="submit">Notify me</button>
+    </form>
+    <p class="form-msg" id="notify-msg"></p>
+  </div>
+
+  <footer>
+    &copy; 2026 Praxis Human Solutions <span class="accent">·</span> A division of Noetic Synthesis LLC <span class="accent">·</span> Cherry Hill, NJ
+  </footer>
+</div>
+
+<script>
+  (function(){
+    var f = document.getElementById('notify-form');
+    var m = document.getElementById('notify-msg');
+    if (!f) return;
+    f.addEventListener('submit', function(e){
+      e.preventDefault();
+      var v = f.email.value.trim();
+      if (!v || !/.+@.+\..+/.test(v)) {
+        m.textContent = 'Please enter a valid email address.';
+        return;
+      }
+      m.textContent = "Thanks — we're still wiring up signups. Check back soon.";
+      f.email.value = '';
+    });
+  })();
+</script>
+
+</body>
+</html>
